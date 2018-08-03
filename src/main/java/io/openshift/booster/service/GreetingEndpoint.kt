@@ -13,25 +13,23 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package io.openshift.booster.service;
+package io.openshift.booster.service
 
-// tag::snippet-greeting[]
-public class Greeting {
+import javax.ws.rs.DefaultValue
+import javax.ws.rs.GET
+import javax.ws.rs.Path
+import javax.ws.rs.Produces
+import javax.ws.rs.QueryParam
 
-    public static final String FORMAT = "Hello, %s!";
+import org.springframework.stereotype.Component
 
-    private final String content;
-
-    public Greeting() {
-        this.content = null;
-    }
-
-    public Greeting(String content) {
-        this.content = content;
-    }
-
-    public String getContent() {
-        return content;
+@Path("/greeting")
+@Component
+class GreetingEndpoint {
+    @GET
+    @Produces("application/json")
+    fun greeting(@QueryParam("name") @DefaultValue("World") name: String): Greeting {
+        val message = String.format(Greeting.FORMAT, name)
+        return Greeting(message)
     }
 }
-// end::snippet-greeting[]

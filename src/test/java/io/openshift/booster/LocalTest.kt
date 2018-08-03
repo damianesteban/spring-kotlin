@@ -13,22 +13,21 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package io.openshift.booster;
+package io.openshift.booster
 
-import org.junit.runner.RunWith;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.junit4.SpringRunner;
+import org.junit.runner.RunWith
+import org.springframework.beans.factory.annotation.Value
+import org.springframework.boot.test.context.SpringBootTest
+import org.springframework.test.context.junit4.SpringRunner
 
-@RunWith(SpringRunner.class)
+@RunWith(SpringRunner::class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-public class LocalTest extends AbstractBoosterApplicationTest {
+class LocalTest : AbstractBoosterApplicationTest() {
 
-    @Value("${local.server.port}")
-    private int port;
+    @Value("\${local.server.port}")
+    private val port: Int = 0
 
-    @Override
-    public String baseURI() {
-        return String.format("http://localhost:%d", port);
+    public override fun baseURI(): String {
+        return String.format("http://localhost:%d", port)
     }
 }

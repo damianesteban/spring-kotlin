@@ -13,24 +13,24 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+package io.openshift.booster.service
 
-package io.openshift.booster;
+// tag::snippet-greeting[]
+class Greeting {
 
-import java.net.URL;
-import org.arquillian.cube.openshift.impl.enricher.AwaitRoute;
-import org.arquillian.cube.openshift.impl.enricher.RouteURL;
-import org.jboss.arquillian.junit.Arquillian;
-import org.junit.runner.RunWith;
+    val content: String?
 
-@RunWith(Arquillian.class)
-public class OpenShiftIT extends AbstractBoosterApplicationTest {
+    constructor() {
+        this.content = null
+    }
 
-    @AwaitRoute(path = "/health")
-    @RouteURL("${app.name}")
-    private URL baseURL;
+    constructor(content: String) {
+        this.content = content
+    }
 
-    @Override
-    public String baseURI() {
-        return baseURL.toString();
+    companion object {
+
+        const val FORMAT = "Hello, %s!"
     }
 }
+// end::snippet-greeting[]
